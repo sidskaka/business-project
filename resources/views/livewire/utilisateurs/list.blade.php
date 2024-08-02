@@ -54,7 +54,7 @@
                                     $user->created_at->diffForHumans() }}</span></td>
                             <td class="text-center">
                                 <button class="btn btn-link"><i class="far fa-edit"></i></button>
-                                <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-link" wire:click="confirmDelete('{{ $user->prenom }} {{ $user->nom }}', {{ $user->id }})"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         @endforeach
@@ -71,3 +71,33 @@
 
     </div>
 </div>
+
+<script>
+    window.addEventListener("showConfirmMessage", event=>{
+        // console.log(event.detail);
+        swal.fire({
+            title: "Voulez-vous vraiment supprimer " + event.detail[0].message.title,
+            text: event.detail[0].message.text,
+            icon: event.detail[0].message.type,
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Revenir"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                @this.deleteUser(event.detail[0].message.data.user_id);
+            }
+        });
+    });
+    window.addEventListener("showSuccessMessage", event=>{
+        // console.log(event.detail);
+        swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: event.detail[0].message || "Your work has been saved",
+            showConfirmButton: false,
+            timer: 3500
+        });
+    });
+</script>

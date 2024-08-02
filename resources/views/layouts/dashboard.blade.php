@@ -66,4 +66,17 @@
     @livewireScripts
 </body>
 
+<script>
+    window.addEventListener("showSuccessMessage", event=>{
+        // console.log(event.detail);
+        swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: event.detail[0].message || "Your work has been saved",
+            showConfirmButton: false,
+            timer: 3500
+        });
+    });
+</script>
+
 </html>
