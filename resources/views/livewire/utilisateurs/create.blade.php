@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label>Adresse e-mail</label>
                         <input type="text" class="form-control @error('newUser.email') is-invalid @enderror" wire:model='newUser.email'>
-                        @error('newUser.email') <span class="error">{{ $message1['newUser.email.required'] }}</span> @enderror
+                        @error('newUser.email') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div class="d-flex">
                         <div class="form-group flex-grow-1 mr-2">
